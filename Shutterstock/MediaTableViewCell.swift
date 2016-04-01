@@ -22,8 +22,11 @@ class MediaTableViewCell: UITableViewCell {
             if let urlString = media.preview.url, url = NSURL(string: urlString) {
                 activityIndicator.startAnimating()
                 activityIndicator.hidden = false
+                self.contentView.bringSubviewToFront(self.titleLabel)
+                self.contentView.bringSubviewToFront(self.activityIndicator)
                 mediaImageView.sd_setImageWithURL(url, completed: { (image, error, cacheType, url) in
                     self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidden = true
                 })
             }
             titleLabel.text = media.decscr

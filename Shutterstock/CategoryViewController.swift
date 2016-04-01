@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CategoryViewController.swift
 //  Shutterstock
 //
 //  Created by Ruslan Musagitov on 01/04/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CategoryViewController: UIViewController {
     
     let perPage = 20
-    
+
     @IBOutlet weak var loadMoreButton : UIButton!
     
     @IBOutlet weak var tableView : UITableView!
@@ -32,15 +32,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchImages(1)
+    }
+    
+    func fetchImages(page: Int) {
         setLoadingState()
-        apiService.fetchImages(category, page: 1, perPage: perPage) { (images) in
-            self.media = images
+        apiService.fetchImages(category, page: page, perPage: perPage) { (images) in
+            self.media.appendContentsOf(images)
+            self.tableView.reloadData()
             self.setLoadedState()
         }
     }
 }
 
-extension ViewController : UITableViewDataSource, UITableViewDelegate {
+extension CategoryViewController : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return media.count
@@ -69,13 +74,8 @@ extension ViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func loadMoreSelected(sender : AnyObject) {
-        setLoadingState()
         let page = media.count / perPage + 1
-        apiService.fetchImages(category, page: page, perPage: perPage, completion: { (images) in
-            self.media.appendContentsOf(images)
-            self.tableView.reloadData()
-            self.setLoadedState()
-        })
+        fetchImages(page)
     }
     
     func setLoadingState() {
