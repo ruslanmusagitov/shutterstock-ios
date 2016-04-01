@@ -15,11 +15,16 @@ class MediaTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mediaImageView : UIImageView!
     @IBOutlet weak var titleLabel : UILabel!
+    @IBOutlet weak var activityIndicator : UIActivityIndicatorView!
     
     var media : ShutterstockMedia! {
         didSet {
             if let urlString = media.preview.url, url = NSURL(string: urlString) {
-                mediaImageView.sd_setImageWithURL(url)
+                activityIndicator.startAnimating()
+                activityIndicator.hidden = false
+                mediaImageView.sd_setImageWithURL(url, completed: { (image, error, cacheType, url) in
+                    self.activityIndicator.stopAnimating()
+                })
             }
             titleLabel.text = media.decscr
         }
