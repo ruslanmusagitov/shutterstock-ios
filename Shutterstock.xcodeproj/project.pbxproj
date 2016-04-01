@@ -15,7 +15,7 @@
 		811749C41CAE4DB500C2155E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811749C31CAE4DB500C2155E /* APIService.swift */; };
 		811749C61CAE508B00C2155E /* ShutterstockMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811749C51CAE508B00C2155E /* ShutterstockMedia.swift */; };
 		811749C81CAE52F600C2155E /* ShutterstockMediaAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811749C71CAE52F600C2155E /* ShutterstockMediaAsset.swift */; };
-		811749CA1CAE557B00C2155E /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811749C91CAE557B00C2155E /* MediaCollectionViewCell.swift */; };
+		811749CA1CAE557B00C2155E /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811749C91CAE557B00C2155E /* MediaTableViewCell.swift */; };
 		E2567EEFE3ED3654077F9ED9 /* Pods_Shutterstock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C02021C723D2176A5714EA8 /* Pods_Shutterstock.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		811749C31CAE4DB500C2155E /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		811749C51CAE508B00C2155E /* ShutterstockMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterstockMedia.swift; sourceTree = "<group>"; };
 		811749C71CAE52F600C2155E /* ShutterstockMediaAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShutterstockMediaAsset.swift; sourceTree = "<group>"; };
-		811749C91CAE557B00C2155E /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
+		811749C91CAE557B00C2155E /* MediaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		8B6F9BDB5F1C03E9BEDF5861 /* Pods-Shutterstock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shutterstock.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shutterstock/Pods-Shutterstock.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,7 +88,7 @@
 			children = (
 				811749B11CAE4CDE00C2155E /* AppDelegate.swift */,
 				811749B31CAE4CDE00C2155E /* ViewController.swift */,
-				811749C91CAE557B00C2155E /* MediaCollectionViewCell.swift */,
+				811749C91CAE557B00C2155E /* MediaTableViewCell.swift */,
 				811749C31CAE4DB500C2155E /* APIService.swift */,
 				811749C51CAE508B00C2155E /* ShutterstockMedia.swift */,
 				811749C71CAE52F600C2155E /* ShutterstockMediaAsset.swift */,
@@ -223,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				811749B41CAE4CDE00C2155E /* ViewController.swift in Sources */,
-				811749CA1CAE557B00C2155E /* MediaCollectionViewCell.swift in Sources */,
+				811749CA1CAE557B00C2155E /* MediaTableViewCell.swift in Sources */,
 				811749C61CAE508B00C2155E /* ShutterstockMedia.swift in Sources */,
 				811749C81CAE52F600C2155E /* ShutterstockMediaAsset.swift in Sources */,
 				811749C41CAE4DB500C2155E /* APIService.swift in Sources */,

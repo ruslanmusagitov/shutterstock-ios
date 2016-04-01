@@ -9,64 +9,69 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var collectionView : UICollectionView!
-
+    
+    let perPage = 20
+    
+    @IBOutlet weak var loadMoreButton : UIButton!
+    
+    @IBOutlet weak var tableView : UITableView!
+    
+    var apiService = APIService()
+    
     var media = [ShutterstockMedia]() {
         didSet {
-            collectionView.reloadData()
+            tableView.reloadData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        APIService().fetchImages { (images) in
+        apiService.fetchImages(1, perPage: perPage) { (images) in
             self.media = images
         }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-
 }
 
-extension ViewController : UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+extension ViewController : UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return media.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(MediaCollectionViewCell.identifier, forIndexPath: indexPath) as! MediaCollectionViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(MediaTableViewCell.identifier) as! MediaTableViewCell
         cell.media = media[indexPath.item]
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
     
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//    }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let width = CGRectGetWidth(tableView.frame)
         let mediaObject = media[indexPath.item]
-        let width = CGRectGetWidth(collectionView.frame)
         let aspect = CGFloat(mediaObject.aspect.floatValue)
-        let size = CGSizeMake(width, width / aspect)
-        return size
+        let height = width / aspect
+        return height
+
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 1 / UIScreen.mainScreen().scale
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return loadMoreButton
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 1 / UIScreen.mainScreen().scale
+    @IBAction func loadMoreSelected(sender : AnyObject) {
+        loadMoreButton.setTitle("Loading...", forState: .Normal)
+        loadMoreButton.enabled = false
+        let page = media.count / perPage + 1
+        apiService.fetchImages(page, perPage: perPage, completion: { (images) in
+            self.media.appendContentsOf(images)
+            self.tableView.reloadData()
+            self.loadMoreButton.setTitle("Load More", forState: .Normal)
+            self.loadMoreButton.enabled = true
+        })
     }
 
 }

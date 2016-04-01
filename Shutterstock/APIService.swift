@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 class APIService {
-    
     let authorizationHeader = ["Authorization" : "Basic MDU5OTIxNGRkZDFmNjA1ZjEzNTg6NDU2MGU4OTczYWY3N2ZiZTg4NTA4MzcyNDViNjI0ZGUyOWMwYmFmMw"]
     
     func fetchImages(page: Int = 1, perPage: Int = 20, completion:([ShutterstockMedia]) -> Void) {
@@ -22,7 +21,6 @@ class APIService {
                         let asset = ShutterstockMedia.create(fromDictionary: dict as! [String : AnyObject])
                         assets.append(asset)
                     }
-                    print(array.first)
                 }
             }
             completion(assets)
